@@ -1,20 +1,22 @@
 module UkAccountValidator
   class Validator
 
+    NON_NUMBERS_EXPRESSION = /[^0-9]/
+
     attr_accessor :account_number,
                   :sort_code
 
     def initialize(account_number = nil, sort_code = nil)
-      @account_number = account_number.to_s.gsub(/[- ]/, '')
-      @sort_code      = sort_code.to_s.gsub(/[- ]/, '')
+      @account_number = account_number.to_s.gsub(NON_NUMBERS_EXPRESSION, '')
+      @sort_code      = sort_code.to_s.gsub(NON_NUMBERS_EXPRESSION, '')
     end
 
     def sort_code=(sort_code)
-      @sort_code = sort_code.to_s.gsub(/[- ]/, '')
+      @sort_code = sort_code.to_s.gsub(NON_NUMBERS_EXPRESSION, '')
     end
 
     def account_number=(account_number)
-      @account_number = account_number.to_s.gsub(/[- ]/, '')
+      @account_number = account_number.to_s.gsub(NON_NUMBERS_EXPRESSION, '')
     end
 
     def modulus_weights
