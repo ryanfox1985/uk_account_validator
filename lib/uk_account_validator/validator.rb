@@ -5,16 +5,16 @@ module UkAccountValidator
                   :sort_code
 
     def initialize(account_number = nil, sort_code = nil)
-      @account_number = remove_non_digits(account_number)
-      @sort_code      = remove_non_digits(sort_code)
+      @account_number = account_number.to_s.strip
+      @sort_code      = sort_code.to_s.gsub(/[- ]/, '')
     end
 
     def sort_code=(sort_code)
-      @sort_code = remove_non_digits(sort_code)
+      @sort_code = sort_code.to_s.gsub(/[- ]/, '')
     end
 
     def account_number=(account_number)
-      @account_number = remove_non_digits(account_number)
+      @account_number = account_number.to_s.strip
     end
 
     def modulus_weights
@@ -86,12 +86,6 @@ module UkAccountValidator
       else
         BaseException
       end
-    end
-
-    def remove_non_digits(value)
-      return "" if value.nil?
-
-      value.gsub(/[^0-9]/, '')
     end
   end
 end
