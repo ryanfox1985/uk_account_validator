@@ -89,7 +89,7 @@ module UkAccountValidator
     end
 
     def parse_sort_code(sort_code)
-      return sort_code if sort_code.to_s.strip.match(/^[0-9]{2}[- ]?[0-9]{2}[- ]?[0-9]{2}$/).nil?
+      return sort_code.to_s if sort_code.to_s.strip.match(/^[0-9]{2}[- ]?[0-9]{2}[- ]?[0-9]{2}$/).nil?
       
       sort_code.gsub(/[- ]/, '') 
     end
