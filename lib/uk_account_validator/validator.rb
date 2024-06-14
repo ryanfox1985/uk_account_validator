@@ -6,11 +6,11 @@ module UkAccountValidator
 
     def initialize(account_number = nil, sort_code = nil)
       @account_number = account_number.to_s.strip
-      @sort_code      = sort_code.to_s.gsub(/[- ]/, '')
+      @sort_code      = parse_sort_code(sort_code)
     end
 
     def sort_code=(sort_code)
-      @sort_code = sort_code.to_s.gsub(/[- ]/, '')
+      @sort_code = parse_sort_code(sort_code)
     end
 
     def account_number=(account_number)
@@ -86,6 +86,12 @@ module UkAccountValidator
       else
         BaseException
       end
+    end
+
+    def parse_sort_code(sort_code)
+      return sort_code if sort_code.to_s.strip.match(/^[0-9]{2}[- ]?[0-9]{2}[- ]?[0-9]{2}$/).nil?
+      
+      sort_code.gsub(/[- ]/, '') 
     end
   end
 end

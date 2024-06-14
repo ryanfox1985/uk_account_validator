@@ -7,3 +7,15 @@ Feature: Allow hyphens in sort codes
     And I have an account number 66374958
 
     Then the combination is valid
+
+  Scenario: A user supplies a valid sort code separated by spaces
+    Given I have a sort code 08 99 99
+    And I have an account number 66374958
+
+    Then the combination is valid
+
+  Scenario: A user supplies an invalid sort code separated by hyphens
+    Given I have a sort code 08-99-99-
+    And I have an account number 66374958
+
+    Then the combination is invalid
